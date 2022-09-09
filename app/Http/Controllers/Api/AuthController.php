@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -12,16 +16,16 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        
+
         // Validate data
         $validator = Validator::make($request->all(), [
-            'fisrtname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|min:6',
         ]);
 
-        // Return errors 
+        // Return errors
         if ($validator->fails()) {
             $errors = $validator->errors();
             return response()->json([
@@ -32,13 +36,13 @@ class AuthController extends Controller
         // Check if validation pass then create user and auth token. Return the auth token
         if ($validator->passes()) {
             $user = User::create([
-                'firstname' => $request->name,
-                'lastname' => $request->name,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
             ]);
             $token = $user->createToken('auth_token')->plainTextToken;
-        
+
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
