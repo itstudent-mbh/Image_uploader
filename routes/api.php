@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ImageUploadController;
+use App\Http\Controllers\Api\StrategyImageUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,6 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->post('/images', [ImageUploadController::class, 'upload']);
+
+Route::middleware('auth:sanctum')->post('/strategy/images', [StrategyImageUploadController::class, 'upload_image']);
 
