@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Uploader;
 
+use Illuminate\Support\Facades\Storage;
+
 /**
  *
  * get image and image base name
@@ -15,6 +17,10 @@ class S3StorageDriver implements StorageInterface
 
         $path = $image->storeAs('images', $image_original_name,'s3');
         return $path;
+    }
+
+    public function clear($image_path){
+        Storage::disk('s3')->delete($image_path);
     }
 }
 
