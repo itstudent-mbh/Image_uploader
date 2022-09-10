@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * use Strategy patern for select Storage image driver
+ * inject driver by imageStorageServiceProvider
+ */
 class StrategyImageUploadController extends Controller
 {
     private $driver;

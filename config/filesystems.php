@@ -15,6 +15,8 @@ return [
 
     'default' => env('FILESYSTEM_DISK', 'local'),
 
+    'image_storage_driver' => env('IMAGE_STORAGE_DRIVER', 'file_system'),
+
     /*
     |--------------------------------------------------------------------------
     | Filesystem Disks

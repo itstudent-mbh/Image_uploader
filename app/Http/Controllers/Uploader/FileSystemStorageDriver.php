@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers\Uploader;
 
-
+/**
+ *
+ * get image and image base name
+ * upluad image to public directory
+ * return image path
+ */
 class FileSystemStorageDriver implements StorageInterface
 {
     public function upload($image, $image_original_name): string {
